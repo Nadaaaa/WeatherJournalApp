@@ -1,5 +1,5 @@
 /* Global Variables */
-const baseURL = 'http://api.openweathermap.org/data/2.5/forecast?id=';
+const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const apiKey = '&appid=566c7073111f5ed97ab8dd691be1bd7c&units=metric';
 
 // Create a new date instance dynamically with JS
@@ -12,9 +12,9 @@ function performAction(e) {
   const zip = document.getElementById('zip').value;
   const content = document.getElementById('feelings').value;
 
-  getData(baseURL, zip, apiKey)
+  getData(baseURL, zip + ',us', apiKey)
     .then(function (userData) {
-      postData('/add', { date: newDate, temp: userData.list[0].main.temp, content })
+      postData('/add', { date: newDate, temp: userData.main.temp, content })
     }).then(function () {
       updateUI()
     })
